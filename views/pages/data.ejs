@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+  <%- include('../partials/header'); %>
+</header>
+
+<main>
+  <div class="jumbotron">
+    <h1>Data</h1>
+    <table>
+        <tr>
+          <th>City</th>
+          <th>Temperature</th>
+        </tr>
+            <% data.forEach((data) => { %>
+          <tr>
+          <td><%= data[0] %></td>
+          <td><%= data[1] %></td>
+          </tr>
+          <% }); %>
+      </table>
+  </div>
+</main>
+
+<footer>
+  <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>
+
+
+
+
+
