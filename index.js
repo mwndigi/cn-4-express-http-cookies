@@ -79,8 +79,14 @@ app.get('/data/', (req, res) => {
 })
 
 app.get('/json-data', async (req, res) => {
-  const weatherData = await fetchRouteAsync()
-  res.status(200).json({ cityTemperature: weatherData })
+  try {
+    const weatherData = await fetchRouteAsync()
+    // returning status 200 with weather data  
+    return res.status(200).json({ cityTemperature: weatherData })
+  } catch(error) {
+    // on error returning status 500 with error message 
+    return res.status(500).json(error)
+  }
 })
 
 app.get('/cookies', (req, res) => {
