@@ -51,7 +51,7 @@ async function fetchRouteAsync() {
               ]
           )
   
-          data = [ 
+          const weatherData = [ 
                     ['Copenhagen', results[0]],
                     ['Berlin', results[1]],
                     ['Los Angeles', results[2]],
@@ -60,14 +60,14 @@ async function fetchRouteAsync() {
 
           // console.log(data)
 
-          return data
+          return weatherData
   
       } catch (e) {
           console.error(e)
       }
   }
 
-fetchRouteAsync()
+
 
 app.get('/', (req, res) => {
   console.log(req.headers)
@@ -78,8 +78,15 @@ app.get('/data/', (req, res) => {
   res.render('pages/data')
 })
 
-app.get('/json-data', (req, res) => {
-  res.status(200).json({ cityTemperature: data })
+app.get('/json-data', async (req, res) => {
+  try {
+    const weatherData = await fetchRouteAsync()
+    // returning status 200 with weather data  
+    return res.status(200).json({ cityTemperature: weatherData })
+  } catch(error) {
+    // on error returning status 500 with error message 
+    return res.status(500).json(error)
+  }
 })
 
 app.get('/cookies', (req, res) => {
